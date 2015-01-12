@@ -46,7 +46,6 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         'click .toggle-play-pause': 'togglePlayPause',
         'click .jump-to': 'jumpTo',
         'click #back-btn': 'rotateSlidesBackwards',
-        'click #next-btn': 'clickSlidesForward'
     },
 
     el: '#slideshow',
@@ -81,10 +80,6 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         var current = this.currentIndex;
         var next = this.currentIndex === (this.collection.length - 1) ? 0 : this.currentIndex + 1;
         this.transition(current, next);
-    },
-
-    clickSlidesForward: function() {
-        this.rotateSlidesForward();
     },
 
     rotateSlidesBackwards: function() {

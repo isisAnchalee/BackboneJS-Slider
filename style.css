@@ -8,6 +8,7 @@
 #slideshow li {
     list-style: none;
 }
+
 #slideshow.collapsed {
     height: 20px;
     border: none;
@@ -38,31 +39,6 @@
 
 .slide.left {
     background-position: left !important;
-}
-
-.slide .headline,
-.slide .caption {
-    position: absolute;
-}
-
-.slide.right .headline {
-    top: 30px;
-    left: 30px;
-}
-
-.slide.right .caption {
-    left: 30px;
-    top: 70px;
-}
-
-.slide.left .headline {
-    top: 30px;
-    right: 30px;
-}
-
-.slide.left .caption {
-    top: 70px;
-    right: 30px;
 }
 
 #slideshow .toggler {
