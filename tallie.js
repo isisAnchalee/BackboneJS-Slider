@@ -46,6 +46,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         'click .toggle-play-pause': 'togglePlayPause',
         'click .jump-to': 'jumpTo',
         'click #back-btn': 'rotateSlidesBackwards',
+        'click #next-btn': 'rotateSlidesForward'
     },
 
     el: '#slideshow',
@@ -81,7 +82,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         var next = this.currentIndex === (this.collection.length - 1) ? 0 : this.currentIndex + 1;
         this.transition(current, next);
     },
-
+    
     rotateSlidesBackwards: function() {
         var current = this.currentIndex;
         var next = this.currentIndex === 0 ? (this.collection.length - 1) : this.currentIndex - 1;
@@ -91,23 +92,15 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
     transition: function(from, to) {
         var current = this.collection.at(from);
         var next = this.collection.at(to);
+        current.getEl().addClass('')
+
+
         current.getEl().fadeOut('slow', function() {
             next.getEl().fadeIn('slow');
         });
         current.getControl().toggleClass('current');
         next.getControl().toggleClass('current');
         this.currentIndex = to;
-    },
-
-    toggleVisibility: function() {
-        var slides = $(this.slides);
-        slides.toggle();
-        $(this.el).toggleClass('collapsed');
-        if (slides.is(":visible")) {
-            this.play();
-        } else {
-            this.pause();
-        }
     },
 
     togglePlayPause: function() {
