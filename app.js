@@ -1,13 +1,15 @@
-// configuration for underscores template syntax
-_.templateSettings = {
-    interpolate: /\{\{(.+?)\}\}/g
-};
+
 
 // app namespace setup
 TallieSlideshow = {
     Views: {},
     Models: {},
     Collections: {}
+};
+
+// configuration for underscores template syntax
+_.templateSettings = {
+    interpolate: /\{\{(.+?)\}\}/g
 };
 
 // a simple slide model
@@ -41,19 +43,18 @@ TallieSlideshow.Collections.Slides = Backbone.Collection.extend({
 // handles events and timing, play, pause, jumpto
 TallieSlideshow.Views.Slideshow = Backbone.View.extend({
 
-    el: '#slideshow',
-    slides: '#slideshow .slides',
-    controls: '#slideshow .controls',
-    playPauseControl: '#slideshow .controls .toggle-play-pause',
-
-    delay: 10000,
-    currentIndex: 0,
-
     events: {
         'click .toggler': 'toggleVisibility',
         'click .toggle-play-pause': 'togglePlayPause',
         'click .jump-to': 'jumpTo'
     },
+
+    el: '#slideshow',
+    slides: '#slideshow .slides',
+    controls: '#slideshow .controls',
+    playPauseControl: '#slideshow .controls .toggle-play-pause',
+    interval: 10000,
+    currentIndex: 0,
 
     slideTemplate: _.template('<li id="slide-{{ id }}" class="slide {{ layout }}">' + '<div class="Title">{{ Title }}<br> </div> <div class="image-wrapper"> <img class="slide-img" src="{{ Url }}"> </div>' + '</li>'),
 
@@ -142,7 +143,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
 
         $('.icon').html("&#10074;&#10074;");
         this.state = 'playing';
-        this.intervalID = setInterval(this.rotateSlidesForward, this.delay);
+        this.intervalID = setInterval(this.rotateSlidesForward, this.interval);
         $(this.playPauseControl).toggleClass('playing', true);
     },
 
