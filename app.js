@@ -60,7 +60,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
     controlTemplate: _.template('<li class="slide-control jump-to" data-index="{{ index }}">{{ human_readable_index }}</li>'),
 
     initialize: function() {
-        _.bindAll(this, 'render', 'rotateSlides', 'togglePlayPause', 'play', 'pause', 'initialPlay', 'transition', 'jumpTo');
+        _.bindAll(this, 'render', 'rotateSlidesForward', 'togglePlayPause', 'play', 'pause', 'initialPlay', 'transition', 'jumpTo');
     },
 
     render: function() {
@@ -76,9 +76,15 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         return this;
     },
 
-    rotateSlides: function() {
+    rotateSlidesForward: function() {
         var current = this.currentIndex;
         var next = this.currentIndex === (this.collection.length - 1) ? 0 : this.currentIndex + 1;
+        this.transition(current, next);
+    },
+
+    rotateSlidesBackwards: function() {
+        var current = this.currentIndex;
+        var next = this.currentIndex === 0 ? (this.collection.length - 1) : this.currentIndex - 1;
         this.transition(current, next);
     },
 
@@ -136,7 +142,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
 
         $('.icon').html("&#10074;&#10074;");
         this.state = 'playing';
-        this.intervalID = setInterval(this.rotateSlides, this.delay);
+        this.intervalID = setInterval(this.rotateSlidesForward, this.delay);
         $(this.playPauseControl).toggleClass('playing', true);
     },
 
