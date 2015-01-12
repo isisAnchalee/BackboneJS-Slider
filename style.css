@@ -1,0 +1,166 @@
+
+#slideshow {
+    position: relative;
+    width: 610px;
+    max-height:400px;
+}
+
+#slideshow li {
+    list-style: none;
+}
+#slideshow.collapsed {
+    height: 20px;
+    border: none;
+}
+
+.slide-img{
+    max-width:590px;
+}
+
+.image-wrapper{
+    width:auto;
+    max-height:281px;
+    overflow: hidden;
+}
+
+.slide {
+    position: relative;
+    display: none; /** slides are hidden by default **/
+    overflow:hidden;
+    width:590px;
+    height: 400px;
+}
+
+.slide.right {
+    background-position: right !important;
+    overflow:hidden;
+}
+
+.slide.left {
+    background-position: left !important;
+}
+
+.slide .headline,
+.slide .caption {
+    position: absolute;
+}
+
+.slide.right .headline {
+    top: 30px;
+    left: 30px;
+}
+
+.slide.right .caption {
+    left: 30px;
+    top: 70px;
+}
+
+.slide.left .headline {
+    top: 30px;
+    right: 30px;
+}
+
+.slide.left .caption {
+    top: 70px;
+    right: 30px;
+}
+
+#slideshow .toggler {
+    display: block;
+    height: 19px;
+    width: 19px;
+    background-color: white;
+    background-position: 0 -493px;
+    border: 1px solid #CCCCCC;
+    bottom: -1px;
+    color: black;
+    position: absolute;
+    right: -1px;
+}
+
+#slideshow.collapsed .toggler {
+    right: 0;
+    bottom: 0;
+    background-position: 0 -438px;
+}
+
+#slideshow .controls {
+    position: absolute;
+/*    bottom: 400px;*/
+    left: 40px;
+}
+
+
+#slideshow.collapsed .controls {
+    display: none;
+}
+
+#slideshow .toggler:hover,
+.slide-control:hover,
+.jump-to.current {
+    cursor: pointer;
+    background-color: #cf0020;
+    color: white;
+}
+
+.toggle-play-pause {
+    background-position: 0 -527px;
+}
+
+.toggle-play-pause.playing {
+    background-position: 0 -509px;
+}
+
+.slide-control {
+    display: inline-block;
+    width: 21px;
+    height: 18px;
+    padding-top: 3px;
+    text-align: center;
+    margin-right: 2px;
+    border: 1px solid #ccc;
+    background-color: #115eab;
+    border-radius: 50%;
+    line-height: 16px;
+    font-family: Helvetica;
+    font-size:12px;
+    color: #e6e6e6;
+}
+
+.slide .Title, .controls{
+    height: 44px;
+    width: 590px;
+    background-color: #d8d8d8;
+}
+
+.controls{
+    height: 44px;
+    width: 550px;
+    background-color: #d8d8d8;
+    position: relative;
+    top: 330px;
+}
+
+.Title{
+    text-align: center;
+    line-height: 44px;
+    font-family: Helvetica;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.slide-control {
+    position:relative;
+    left:370px;
+    top:12px;
+}
+
+#back-btn{
+    position:relative;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 31.5px 22px 31.5px 0;
+    border-color: transparent #87add4 transparent transparent;
+}
+
