@@ -164,6 +164,7 @@
     position: relative;
     top:-255px;
     left:10px;
+    cursor: pointer;
 }
 
 #next-btn{
@@ -175,4 +176,5 @@
     border-color: transparent transparent transparent #87add4;
     left:628px;
     top:-30px;
+    cursor: pointer;
 }

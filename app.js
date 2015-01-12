@@ -12,7 +12,7 @@ _.templateSettings = {
     interpolate: /\{\{(.+?)\}\}/g
 };
 
-// a simple slide model
+// setting up slide model
 TallieSlideshow.Models.Slide = Backbone.Model.extend({
     defaults: {
         id: null,
@@ -34,19 +34,19 @@ TallieSlideshow.Models.Slide = Backbone.Model.extend({
     }
 });
 
-// and a simple collection that holds slides
+// create collection of slides
 TallieSlideshow.Collections.Slides = Backbone.Collection.extend({
     model: TallieSlideshow.Models.Slide
 });
 
-// the meat of the logic, defines the slideshow, hooks into existing dom elements representing slides and controls
-// handles events and timing, play, pause, jumpto
+// creates slide view that takes in slide collection handles various events
 TallieSlideshow.Views.Slideshow = Backbone.View.extend({
 
     events: {
-        'click .toggler': 'toggleVisibility',
         'click .toggle-play-pause': 'togglePlayPause',
-        'click .jump-to': 'jumpTo'
+        'click .jump-to': 'jumpTo',
+        'click #back-btn': 'rotateSlidesBackwards',
+        'click #next-btn': 'clickSlidesForward'
     },
 
     el: '#slideshow',
@@ -61,7 +61,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
     controlTemplate: _.template('<li class="slide-control jump-to" data-index="{{ index }}">{{ human_readable_index }}</li>'),
 
     initialize: function() {
-        _.bindAll(this, 'render', 'rotateSlidesForward', 'togglePlayPause', 'play', 'pause', 'initialPlay', 'transition', 'jumpTo');
+        _.bindAll(this, 'render', 'rotateSlidesForward','rotateSlidesBackwards', 'togglePlayPause', 'play', 'pause', 'initialPlay', 'transition', 'jumpTo');
     },
 
     render: function() {
@@ -81,6 +81,10 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
         var current = this.currentIndex;
         var next = this.currentIndex === (this.collection.length - 1) ? 0 : this.currentIndex + 1;
         this.transition(current, next);
+    },
+
+    clickSlidesForward: function() {
+        this.rotateSlidesForward();
     },
 
     rotateSlidesBackwards: function() {
@@ -163,6 +167,7 @@ TallieSlideshow.Views.Slideshow = Backbone.View.extend({
 
 });
 
+//slide data
 TallieSlideshow.SliderData = {
   "Images": [
     {
@@ -192,6 +197,7 @@ TallieSlideshow.SliderData = {
     }
 ] };
 
+//generates collection using slide data
 TallieSlideshow.SliderCollection =  new TallieSlideshow.Collections.Slides(TallieSlideshow.SliderData["Images"], { view: this });
 
 // creates an instance of our slideshow, passes in a new collection of slides
